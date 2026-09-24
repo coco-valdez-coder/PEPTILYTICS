@@ -47,7 +47,6 @@ export default function NewPatientForm({
       if (dbErr) throw new Error(dbErr.message)
 
       // Crear usuario de auth para que el paciente pueda hacer login
-      // Usa el service-role desde un API route de Next.js para mayor seguridad
       await fetch('/api/create-patient-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -65,40 +64,40 @@ export default function NewPatientForm({
   return (
     <div style={{ maxWidth: '720px' }}>
       <div style={{ marginBottom: '28px' }}>
-        <h1 style={{ fontFamily: 'DM Sans', fontSize: '24px', fontWeight: 700, margin: '0 0 6px' }}>
+        <h1 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '24px', fontWeight: 700, margin: '0 0 6px', color: '#0f172a' }}>
           Registrar Nuevo Paciente
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '14px', margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: '14px', margin: 0, fontWeight: 500 }}>
           El paciente recibirá acceso con su cédula como usuario
         </p>
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="glass-card" style={{ padding: '24px', marginBottom: '16px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', marginBottom: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
           <h3 style={sectionStyle}>👤 Datos Personales</h3>
           <div style={gridStyle}>
             <Field label="Número de Cédula *" required>
-              <input className="input-dark" placeholder="0000000000"
+              <input style={inputStyle} placeholder="0000000000"
                 value={form.cedula} onChange={e => set('cedula', e.target.value)} required />
             </Field>
             <Field label="Nombre completo *" required>
-              <input className="input-dark" placeholder="Nombre y apellidos"
+              <input style={inputStyle} placeholder="Nombre y apellidos"
                 value={form.full_name} onChange={e => set('full_name', e.target.value)} required />
             </Field>
             <Field label="Correo electrónico">
-              <input className="input-dark" type="email" placeholder="paciente@email.com"
+              <input style={inputStyle} type="email" placeholder="paciente@email.com"
                 value={form.email} onChange={e => set('email', e.target.value)} />
             </Field>
             <Field label="Teléfono">
-              <input className="input-dark" placeholder="+593 99 000 0000"
+              <input style={inputStyle} placeholder="+593 99 000 0000"
                 value={form.phone} onChange={e => set('phone', e.target.value)} />
             </Field>
             <Field label="Fecha de nacimiento">
-              <input className="input-dark" type="date"
+              <input style={inputStyle} type="date"
                 value={form.birth_date} onChange={e => set('birth_date', e.target.value)} />
             </Field>
             <Field label="Género">
-              <select className="input-dark" value={form.gender} onChange={e => set('gender', e.target.value)}>
+              <select style={inputStyle} value={form.gender} onChange={e => set('gender', e.target.value)}>
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
                 <option value="Other">Otro</option>
@@ -107,42 +106,49 @@ export default function NewPatientForm({
           </div>
         </div>
 
-        <div className="glass-card" style={{ padding: '24px', marginBottom: '16px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', marginBottom: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
           <h3 style={sectionStyle}>🎯 Metas y Datos Iniciales</h3>
           <div style={gridStyle}>
             <Field label="Peso inicial (kg)">
-              <input className="input-dark" type="number" step="0.1" placeholder="ej: 95.5"
+              <input style={inputStyle} type="number" step="0.1" placeholder="ej: 95.5"
                 value={form.initial_weight} onChange={e => set('initial_weight', e.target.value)} />
             </Field>
             <Field label="Meta de peso (kg)">
-              <input className="input-dark" type="number" step="0.1" placeholder="ej: 75.0"
+              <input style={inputStyle} type="number" step="0.1" placeholder="ej: 75.0"
                 value={form.goal_weight} onChange={e => set('goal_weight', e.target.value)} />
             </Field>
             <Field label="Meta % Grasa Corporal">
-              <input className="input-dark" type="number" step="0.1" placeholder="ej: 18.0"
+              <input style={inputStyle} type="number" step="0.1" placeholder="ej: 18.0"
                 value={form.goal_fat_pct} onChange={e => set('goal_fat_pct', e.target.value)} />
             </Field>
           </div>
         </div>
 
-        <div className="glass-card" style={{ padding: '24px', marginBottom: '24px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', marginBottom: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
           <h3 style={sectionStyle}>📋 Notas Generales</h3>
-          <textarea className="input-dark" rows={4}
+          <textarea style={{ ...inputStyle, resize: 'vertical', height: '120px' }} rows={4}
             placeholder="Antecedentes, condiciones relevantes, alergias..."
             value={form.notes_general} onChange={e => set('notes_general', e.target.value)}
-            style={{ resize: 'vertical' }}
           />
         </div>
 
         {error && (
           <div style={{
-            background: 'var(--red-dim)', border: '1px solid var(--red)',
+            background: '#fee2e2', border: '1px solid #fecaca',
             borderRadius: '8px', padding: '12px', marginBottom: '16px',
-            color: 'var(--red)', fontSize: '14px',
+            color: '#dc2626', fontSize: '14px', fontWeight: 500,
           }}>{error}</div>
         )}
 
-        <button className="btn-primary" type="submit" disabled={saving}>
+        <button 
+          type="submit" 
+          disabled={saving}
+          style={{ 
+            padding: '10px 20px', background: '#2563eb', color: '#ffffff', 
+            border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '14px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+          }}
+        >
           {saving ? 'Registrando...' : '✅ Registrar Paciente'}
         </button>
       </form>
@@ -150,9 +156,21 @@ export default function NewPatientForm({
   )
 }
 
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '10px 12px',
+  background: '#ffffff',
+  border: '1px solid #cbd5e1',
+  borderRadius: '8px',
+  color: '#0f172a',
+  outline: 'none',
+  fontSize: '14px',
+  boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+}
+
 const sectionStyle: React.CSSProperties = {
-  fontFamily: 'DM Sans', fontSize: '15px', fontWeight: 700,
-  margin: '0 0 16px', color: 'var(--text-primary)',
+  fontFamily: 'DM Sans, sans-serif', fontSize: '15px', fontWeight: 700,
+  margin: '0 0 16px', color: '#0f172a',
 }
 const gridStyle: React.CSSProperties = {
   display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px',
@@ -161,8 +179,8 @@ const gridStyle: React.CSSProperties = {
 function Field({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) {
   return (
     <div>
-      <label style={{ fontSize: '12px', color: 'var(--text-secondary)', display: 'block', marginBottom: '6px', fontWeight: 500 }}>
-        {label}{required && <span style={{ color: 'var(--red)', marginLeft: '2px' }}>*</span>}
+      <label style={{ fontSize: '12px', color: '#475569', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
+        {label}{required && <span style={{ color: '#dc2626', marginLeft: '2px' }}>*</span>}
       </label>
       {children}
     </div>

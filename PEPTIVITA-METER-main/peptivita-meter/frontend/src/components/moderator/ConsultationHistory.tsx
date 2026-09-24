@@ -104,30 +104,30 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
   }
 
   if (loading) return (
-    <div style={{ padding: '24px', color: 'var(--text-secondary)', fontSize: '14px' }}>
+    <div style={{ padding: '24px', color: '#64748b', fontSize: '14px' }}>
       Cargando historial...
     </div>
   )
 
   if (consultations.length === 0) return (
-    <div style={{ textAlign: 'center', padding: '48px 24px' }}>
+    <div style={{ textAlign: 'center', padding: '48px 24px', background: '#ffffff', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
       <div style={{ fontSize: '40px', marginBottom: '12px' }}>📋</div>
-      <p style={{ color: 'var(--text-secondary)' }}>No hay consultas registradas aún.</p>
+      <p style={{ color: '#64748b', fontWeight: 500 }}>No hay consultas registradas aún.</p>
     </div>
   )
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h2 style={{ fontFamily: 'DM Sans', fontSize: '20px', fontWeight: 700, margin: 0 }}>
+        <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '20px', fontWeight: 700, margin: 0, color: '#0f172a' }}>
           📋 Historial de Consultas
         </h2>
-        <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+        <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 500 }}>
           {consultations.length} consulta{consultations.length !== 1 ? 's' : ''}
         </span>
       </div>
 
-      <div style={{ display: 'grid', gap: '10px' }}>
+      <div style={{ display: 'grid', gap: '12px' }}>
         {consultations.map((c, i) => {
           const a = c.anthropometrics?.[0]
           const peps = c.peptide_treatments || []
@@ -135,30 +135,30 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
           const photos = c.progress_photos || []
 
           return (
-            <div key={c.id} className="glass-card" style={{ padding: '0', overflow: 'hidden', position: 'relative' }}>
+            <div key={c.id} style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden', position: 'relative', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
               {/* Header de la consulta */}
               <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 padding: '16px 20px',
-                borderBottom: '1px solid var(--border)',
-                background: 'var(--bg-elevated)',
+                borderBottom: '1px solid #e2e8f0',
+                background: '#f8fafc',
                 flexWrap: 'wrap', gap: '12px'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{
-                    background: 'var(--cyan-dim)', color: 'var(--cyan)',
+                    background: '#eff6ff', color: '#2563eb',
                     borderRadius: '8px', padding: '4px 10px',
-                    fontSize: '12px', fontWeight: 700,
+                    fontSize: '12px', fontWeight: 700, border: '1px solid #bfdbfe'
                   }}>
                     #{consultations.length - i}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '15px' }}>
+                    <div style={{ fontWeight: 700, fontSize: '15px', color: '#0f172a' }}>
                       {new Date(c.consultation_date + 'T00:00:00').toLocaleDateString('es', {
                         weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
                       })}
                     </div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                    <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px', fontWeight: 500 }}>
                       {[
                         a && '📏 Mediciones',
                         peps.length > 0 && `💉 ${peps.length} péptido${peps.length > 1 ? 's' : ''}`,
@@ -173,17 +173,22 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
                 {/* Botones de acción */}
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <button
-                    className="btn-ghost"
                     onClick={() => setDeletingId(c.id)}
-                    style={{ fontSize: '14px', padding: '8px 12px', color: 'var(--red)', border: '1px solid transparent' }}
+                    style={{ 
+                      fontSize: '14px', padding: '8px 12px', color: '#dc2626', 
+                      background: '#transparent', border: '1px solid #fecaca', borderRadius: '8px', cursor: 'pointer' 
+                    }}
                     title="Eliminar consulta"
                   >
                     🗑️
                   </button>
                   <button
-                    className="btn-primary"
                     onClick={() => setEditingId(c.id)}
-                    style={{ fontSize: '13px', padding: '8px 16px' }}
+                    style={{ 
+                      fontSize: '13px', padding: '8px 16px', background: '#2563eb', 
+                      color: '#ffffff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600,
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                    }}
                   >
                     ✏️ Editar
                   </button>
@@ -193,22 +198,22 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
               {/* Resumen rápido */}
               <div style={{ padding: '16px 20px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
                 {a?.weight_kg && (
-                  <Stat label="Peso" value={`${a.weight_kg} kg`} color="var(--cyan)" />
+                  <Stat label="Peso" value={`${a.weight_kg} kg`} color="#2563eb" />
                 )}
                 {a?.body_fat_pct && (
-                  <Stat label="% Grasa" value={`${a.body_fat_pct}%`} color="var(--amber)" />
+                  <Stat label="% Grasa" value={`${a.body_fat_pct}%`} color="#d97706" />
                 )}
                 {a?.muscle_mass_kg && (
-                  <Stat label="Músculo" value={`${a.muscle_mass_kg} kg`} color="var(--purple)" />
+                  <Stat label="Músculo" value={`${a.muscle_mass_kg} kg`} color="#7c3aed" />
                 )}
                 {a?.waist_cm && (
-                  <Stat label="Cintura" value={`${a.waist_cm} cm`} color="var(--green)" />
+                  <Stat label="Cintura" value={`${a.waist_cm} cm`} color="#16a34a" />
                 )}
                 {a?.bmi && (
-                  <Stat label="IMC" value={Number(a.bmi).toFixed(1)} color="var(--text-secondary)" />
+                  <Stat label="IMC" value={Number(a.bmi).toFixed(1)} color="#475569" />
                 )}
                 {a?.bp_systolic && a?.bp_diastolic && (
-                  <Stat label="Presión" value={`${a.bp_systolic}/${a.bp_diastolic}`} color="var(--red)" />
+                  <Stat label="Presión" value={`${a.bp_systolic}/${a.bp_diastolic}`} color="#dc2626" />
                 )}
               </div>
 
@@ -216,14 +221,14 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
               {c.notes_specialist && (
                 <div style={{
                   margin: '0 20px 16px',
-                  background: 'var(--cyan-dim)',
-                  borderLeft: '3px solid var(--cyan)',
+                  background: '#eff6ff',
+                  borderLeft: '3px solid #2563eb',
                   borderRadius: '0 8px 8px 0',
                   padding: '10px 14px',
                   fontSize: '13px', lineHeight: '1.6',
-                  color: 'var(--text-secondary)',
+                  color: '#334155',
                 }}>
-                  <span style={{ color: 'var(--cyan)', fontWeight: 600 }}>Nota: </span>
+                  <span style={{ color: '#2563eb', fontWeight: 600 }}>Nota: </span>
                   {c.notes_specialist}
                 </div>
               )}
@@ -231,15 +236,15 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
               {/* Péptidos */}
               {peps.length > 0 && (
                 <div style={{ padding: '0 20px 16px' }}>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '8px' }}>
+                  <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, marginBottom: '8px' }}>
                     PÉPTIDOS
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {peps.map((pep: any) => (
                       <span key={pep.id} style={{
-                        background: 'var(--bg-elevated)', border: '1px solid var(--border)',
+                        background: '#f8fafc', border: '1px solid #cbd5e1',
                         borderRadius: '20px', padding: '4px 12px',
-                        fontSize: '12px', color: 'var(--text-secondary)',
+                        fontSize: '12px', color: '#334155', fontWeight: 500
                       }}>
                         💉 {pep.peptide_name} {pep.dose_value}{pep.dose_unit} · {pep.frequency}
                       </span>
@@ -251,20 +256,20 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
               {/* Labs con clasificación */}
               {labs.length > 0 && (
                 <div style={{ padding: '0 20px 16px' }}>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '8px' }}>
+                  <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, marginBottom: '8px' }}>
                     LABORATORIO
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {labs.map((lab: any) => {
                       const cls = lab.classification
-                      const colors: Record<string, string> = { NORMAL: 'var(--green)', LOW: 'var(--cyan)', HIGH: 'var(--red)', UNCLASSIFIED: 'var(--text-muted)' }
-                      const bgs: Record<string, string> = { NORMAL: 'var(--green-dim)', LOW: 'var(--cyan-dim)', HIGH: 'var(--red-dim)', UNCLASSIFIED: 'var(--bg-elevated)' }
+                      const colors: Record<string, string> = { NORMAL: '#16a34a', LOW: '#0284c7', HIGH: '#dc2626', UNCLASSIFIED: '#64748b' }
+                      const bgs: Record<string, string> = { NORMAL: '#f0fdf4', LOW: '#f0f9ff', HIGH: '#fef2f2', UNCLASSIFIED: '#f8fafc' }
                       return (
                         <span key={lab.id} style={{
-                          background: bgs[cls] || 'var(--bg-elevated)',
-                          border: `1px solid ${colors[cls] || 'var(--border)'}`,
+                          background: bgs[cls] || '#f8fafc',
+                          border: `1px solid ${colors[cls] || '#cbd5e1'}`,
                           borderRadius: '20px', padding: '4px 12px',
-                          fontSize: '12px', color: colors[cls] || 'var(--text-secondary)',
+                          fontSize: '12px', color: colors[cls] || '#334155', fontWeight: 500
                         }}>
                           {lab.custom_parameter}: {lab.value_numeric} {lab.custom_unit}
                         </span>
@@ -282,30 +287,28 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
       {deletingId && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(5px)',
+          background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(4px)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
           padding: '20px'
         }}>
-          <div className="glass-card" style={{ maxWidth: '400px', width: '100%', padding: '32px 24px', textAlign: 'center', border: '1px solid var(--red)' }}>
+          <div style={{ background: '#ffffff', maxWidth: '400px', width: '100%', padding: '32px 24px', textAlign: 'center', borderRadius: '12px', border: '1px solid #fecaca', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
             <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚠️</div>
-            <h3 style={{ fontFamily: 'DM Sans', fontSize: '20px', fontWeight: 700, margin: '0 0 12px', color: 'white' }}>
+            <h3 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '20px', fontWeight: 700, margin: '0 0 12px', color: '#0f172a' }}>
               ¿Eliminar esta consulta?
             </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '28px', lineHeight: 1.5 }}>
+            <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '28px', lineHeight: 1.5 }}>
               Esta acción <b>no se puede deshacer</b>. Se borrarán de forma permanente todas las medidas antropométricas, laboratorios, péptidos y fotos vinculados a esta fecha.
             </p>
             <div style={{ display: 'flex', gap: '12px' }}>
               <button 
-                className="btn-ghost" 
-                style={{ flex: 1, padding: '12px', fontSize: '14px' }} 
+                style={{ flex: 1, padding: '12px', fontSize: '14px', background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '8px', color: '#475569', cursor: 'pointer', fontWeight: 600 }} 
                 onClick={() => setDeletingId(null)} 
                 disabled={isDeleting}
               >
                 Cancelar
               </button>
               <button 
-                className="btn-primary" 
-                style={{ flex: 1, padding: '12px', fontSize: '14px', background: 'var(--red)', borderColor: 'var(--red)', color: 'white' }} 
+                style={{ flex: 1, padding: '12px', fontSize: '14px', background: '#dc2626', border: 'none', borderRadius: '8px', color: '#ffffff', cursor: 'pointer', fontWeight: 600 }} 
                 onClick={confirmDelete} 
                 disabled={isDeleting}
               >
@@ -322,8 +325,8 @@ export default function ConsultationHistory({ patient }: { patient: Patient }) {
 function Stat({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <div>
-      <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '2px' }}>{label}</div>
-      <div style={{ fontSize: '16px', fontWeight: 700, color, fontFamily: 'JetBrains Mono, monospace' }}>{value}</div>
+      <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '2px', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: '16px', fontWeight: 700, color, fontFamily: 'monospace' }}>{value}</div>
     </div>
   )
 }

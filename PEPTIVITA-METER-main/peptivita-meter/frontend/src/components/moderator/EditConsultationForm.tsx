@@ -11,13 +11,13 @@ const PEPTIDE_CATALOG = [
 ]
 
 const LAB_STUDIES = [
-  { name: 'Perfil Lipídico',               params: ['Colesterol Total','Colesterol LDL','Colesterol HDL','Triglicéridos','VLDL'] },
-  { name: 'Glicemia en ayunas',             params: ['Glicemia en ayunas'] },
-  { name: 'Hemoglobina Glicosilada HbA1c',  params: ['HbA1c'] },
-  { name: 'Marcadores Hepáticos',           params: ['TGO / AST','TGP / ALT','GGT','Fosfatasa Alcalina','Bilirrubina Total'] },
-  { name: 'Hemograma Completo',             params: ['Hemoglobina','Hematocrito','Leucocitos','Plaquetas'] },
-  { name: 'Perfil Tiroideo',                params: ['TSH','T3 libre','T4 libre'] },
-  { name: 'Perfil Renal',                   params: ['Creatinina','BUN / Urea','Ácido Úrico'] },
+  { name: 'Perfil Lipídico',                 params: ['Colesterol Total','Colesterol LDL','Colesterol HDL','Triglicéridos','VLDL'] },
+  { name: 'Glicemia en ayunas',              params: ['Glicemia en ayunas'] },
+  { name: 'Hemoglobina Glicosilada HbA1c',   params: ['HbA1c'] },
+  { name: 'Marcadores Hepáticos',            params: ['TGO / AST','TGP / ALT','GGT','Fosfatasa Alcalina','Bilirrubina Total'] },
+  { name: 'Hemograma Completo',              params: ['Hemoglobina','Hematocrito','Leucocitos','Plaquetas'] },
+  { name: 'Perfil Tiroideo',                 params: ['TSH','T3 libre','T4 libre'] },
+  { name: 'Perfil Renal',                    params: ['Creatinina','BUN / Urea','Ácido Úrico'] },
 ]
 
 export default function EditConsultationForm({
@@ -36,30 +36,30 @@ export default function EditConsultationForm({
   const [notes, setNotes] = useState(consultation?.notes_specialist || '')
 
   const [anthropo, setAnthro] = useState({
-    age:                  String(a.age || ''),
-    height_cm:            String(a.height_cm || ''),
-    weight_kg:            String(a.weight_kg || ''),
-    neck_cm:              String(a.neck_cm || ''),
-    wrist_cm:             String(a.wrist_cm || ''),
-    bicep_left_cm:        String(a.bicep_left_cm || ''),
-    bicep_right_cm:       String(a.bicep_right_cm || ''),
-    bicep_left_flex_cm:   String(a.bicep_left_flex_cm || ''),
-    bicep_right_flex_cm:  String(a.bicep_right_flex_cm || ''),
-    chest_cm:             String(a.chest_cm || ''),
-    waist_cm:             String(a.waist_cm || ''),
-    hip_cm:               String(a.hip_cm || ''),
-    thigh_left_cm:        String(a.thigh_left_cm || ''),
-    thigh_right_cm:       String(a.thigh_right_cm || ''),
-    thigh_left_flex_cm:   String(a.thigh_left_flex_cm || ''),
-    thigh_right_flex_cm:  String(a.thigh_right_flex_cm || ''),
-    body_fat_pct:         String(a.body_fat_pct || ''),
-    muscle_mass_kg:       String(a.muscle_mass_kg || ''),
+    age:                    String(a.age || ''),
+    height_cm:              String(a.height_cm || ''),
+    weight_kg:              String(a.weight_kg || ''),
+    neck_cm:                String(a.neck_cm || ''),
+    wrist_cm:               String(a.wrist_cm || ''),
+    bicep_left_cm:          String(a.bicep_left_cm || ''),
+    bicep_right_cm:         String(a.bicep_right_cm || ''),
+    bicep_left_flex_cm:     String(a.bicep_left_flex_cm || ''),
+    bicep_right_flex_cm:    String(a.bicep_right_flex_cm || ''),
+    chest_cm:               String(a.chest_cm || ''),
+    waist_cm:               String(a.waist_cm || ''),
+    hip_cm:                 String(a.hip_cm || ''),
+    thigh_left_cm:          String(a.thigh_left_cm || ''),
+    thigh_right_cm:         String(a.thigh_right_cm || ''),
+    thigh_left_flex_cm:     String(a.thigh_left_flex_cm || ''),
+    thigh_right_flex_cm:    String(a.thigh_right_flex_cm || ''),
+    body_fat_pct:           String(a.body_fat_pct || ''),
+    muscle_mass_kg:         String(a.muscle_mass_kg || ''),
   })
 
   const [vitals, setVitals] = useState({
-    bp_systolic:  String(a.bp_systolic || ''),
-    bp_diastolic: String(a.bp_diastolic || ''),
-    heart_rate:   String(a.heart_rate || ''),
+    bp_systolic:    String(a.bp_systolic || ''),
+    bp_diastolic:   String(a.bp_diastolic || ''),
+    heart_rate:     String(a.heart_rate || ''),
   })
 
   // Péptidos: existentes + nuevos
@@ -199,37 +199,47 @@ export default function EditConsultationForm({
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '13px', marginBottom: '6px', padding: 0, display: 'block' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '13px', marginBottom: '6px', padding: 0, display: 'block', fontWeight: 500 }}>
             ← Volver al historial
           </button>
-          <h2 style={{ fontFamily: 'DM Sans', fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>
+          <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '20px', fontWeight: 700, margin: '0 0 4px', color: '#0f172a' }}>
             ✏️ Editando Consulta — {patient.full_name}
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '13px', margin: 0 }}>
+          <p style={{ color: '#64748b', fontSize: '13px', margin: 0, fontWeight: 500 }}>
             {new Date(consultation.consultation_date + 'T00:00:00').toLocaleDateString('es', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
-        <button className="btn-primary" onClick={handleSave} disabled={saving}>
+        <button 
+          onClick={handleSave} 
+          disabled={saving}
+          style={{ 
+            padding: '9px 18px', background: '#2563eb', color: '#ffffff', 
+            border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '14px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+          }}
+        >
           {saving ? '💾 Guardando...' : '💾 Guardar Cambios'}
         </button>
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '24px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '6px', marginBottom: '24px', flexWrap: 'wrap' }}>
         {sections.map(s => (
           <button key={s.id} onClick={() => setActiveSection(s.id)}
             style={{
-              padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer',
-              fontSize: '13px', fontWeight: 500,
-              background: activeSection === s.id ? 'var(--amber-dim)' : 'var(--bg-card)',
-              color: activeSection === s.id ? 'var(--amber)' : 'var(--text-secondary)',
+              padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
+              fontSize: '13px', fontWeight: 600,
+              background: activeSection === s.id ? '#eff6ff' : '#ffffff',
+              color: activeSection === s.id ? '#2563eb' : '#64748b',
+              border: activeSection === s.id ? '1px solid #bfdbfe' : '1px solid #e2e8f0',
+              boxShadow: activeSection === s.id ? '0 1px 2px rgba(37,99,235,0.05)' : 'none',
               transition: 'all 0.15s',
             }}
           >{s.icon} {s.label}</button>
         ))}
       </div>
 
-      <div className="glass-card" style={{ padding: '24px' }}>
+      <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
 
         {/* ── ANTROPOMETRÍA ── */}
         {activeSection === 'anthropo' && (
@@ -251,8 +261,8 @@ export default function EditConsultationForm({
                 { k: 'chest_cm', l: 'Pecho' }, { k: 'waist_cm', l: 'Cintura' }, { k: 'hip_cm', l: 'Cadera' },
               ].map(f => <FF key={f.k} label={f.l} placeholder="cm" value={(anthropo as any)[f.k]} onChange={v => setAnthro(a => ({ ...a, [f.k]: v }))} />)}
             </div>
-            <div style={{ marginTop: '16px' }}>
-              <div style={{ fontSize: '13px', color: 'var(--cyan)', fontWeight: 600, marginBottom: '10px' }}>💪 Bíceps</div>
+            <div style={{ marginTop: '20px' }}>
+              <div style={{ fontSize: '13px', color: '#2563eb', fontWeight: 600, marginBottom: '10px' }}>💪 Bíceps</div>
               <div style={grid}>
                 {[
                   { k: 'bicep_left_cm', l: 'Bíceps Izq. relajado' },
@@ -262,8 +272,8 @@ export default function EditConsultationForm({
                 ].map(f => <FF key={f.k} label={f.l} placeholder="cm" value={(anthropo as any)[f.k]} onChange={v => setAnthro(a => ({ ...a, [f.k]: v }))} />)}
               </div>
             </div>
-            <div style={{ marginTop: '16px' }}>
-              <div style={{ fontSize: '13px', color: 'var(--cyan)', fontWeight: 600, marginBottom: '10px' }}>🦵 Muslos</div>
+            <div style={{ marginTop: '20px' }}>
+              <div style={{ fontSize: '13px', color: '#2563eb', fontWeight: 600, marginBottom: '10px' }}>🦵 Muslos</div>
               <div style={grid}>
                 {[
                   { k: 'thigh_left_cm', l: 'Muslo Izq. relajado' },
@@ -293,21 +303,21 @@ export default function EditConsultationForm({
           <div>
             <STitle icon="💉" title="Péptidos" />
             {peptides.length === 0 && (
-              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '16px' }}>
+              <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '16px' }}>
                 No hay péptidos registrados en esta consulta. Agrega uno abajo.
               </p>
             )}
             {peptides.map((pep: any, i: number) => (
               <div key={i} style={{
-                background: pep.isNew ? 'rgba(0,200,255,0.04)' : 'var(--bg-elevated)',
+                background: pep.isNew ? '#f0f9ff' : '#f8fafc',
                 borderRadius: '10px', padding: '16px', marginBottom: '12px',
-                border: `1px solid ${pep.isNew ? 'var(--cyan)' : 'var(--border)'}`,
+                border: `1px solid ${pep.isNew ? '#bae6fd' : '#e2e8f0'}`,
               }}>
-                {pep.isNew && <div style={{ fontSize: '11px', color: 'var(--cyan)', fontWeight: 700, marginBottom: '10px' }}>✨ NUEVO</div>}
+                {pep.isNew && <div style={{ fontSize: '11px', color: '#0284c7', fontWeight: 700, marginBottom: '10px' }}>✨ NUEVO</div>}
                 <div style={grid}>
                   <div>
                     <label style={ls}>Péptido</label>
-                    <select className="input-dark" value={pep.peptide_name}
+                    <select style={inputStyle} value={pep.peptide_name}
                       onChange={e => { const c=[...peptides]; c[i].peptide_name=e.target.value; setPeptides(c) }}>
                       {PEPTIDE_CATALOG.map(p => <option key={p}>{p}</option>)}
                     </select>
@@ -315,9 +325,9 @@ export default function EditConsultationForm({
                   <div>
                     <label style={ls}>Dosis</label>
                     <div style={{ display: 'flex', gap: '6px' }}>
-                      <input className="input-dark" type="number" value={pep.dose_value} style={{ flex: 1 }}
+                      <input style={{ ...inputStyle, flex: 1 }} type="number" value={pep.dose_value}
                         onChange={e => { const c=[...peptides]; c[i].dose_value=e.target.value; setPeptides(c) }} />
-                      <select className="input-dark" style={{ width: '70px' }} value={pep.dose_unit}
+                      <select style={{ ...inputStyle, width: '70px' }} value={pep.dose_unit}
                         onChange={e => { const c=[...peptides]; c[i].dose_unit=e.target.value; setPeptides(c) }}>
                         {['mcg','mg','IU','ml'].map(u => <option key={u}>{u}</option>)}
                       </select>
@@ -325,36 +335,36 @@ export default function EditConsultationForm({
                   </div>
                   <div>
                     <label style={ls}>Frecuencia</label>
-                    <select className="input-dark" value={pep.frequency}
+                    <select style={inputStyle} value={pep.frequency}
                       onChange={e => { const c=[...peptides]; c[i].frequency=e.target.value; setPeptides(c) }}>
                       {['daily','weekly','EOD','BID','monthly','custom'].map(f => <option key={f}>{f}</option>)}
                     </select>
                   </div>
                   <div>
                     <label style={ls}>Vía</label>
-                    <select className="input-dark" value={pep.administration_route}
+                    <select style={inputStyle} value={pep.administration_route}
                       onChange={e => { const c=[...peptides]; c[i].administration_route=e.target.value; setPeptides(c) }}>
                       {['subcutaneous','intramuscular','oral','topical','intranasal'].map(r => <option key={r}>{r}</option>)}
                     </select>
                   </div>
                   <div>
                     <label style={ls}>Inicio ciclo</label>
-                    <input className="input-dark" type="date" value={pep.cycle_start}
+                    <input style={inputStyle} type="date" value={pep.cycle_start}
                       onChange={e => { const c=[...peptides]; c[i].cycle_start=e.target.value; setPeptides(c) }} />
                   </div>
                   <div>
                     <label style={ls}>Fin ciclo</label>
-                    <input className="input-dark" type="date" value={pep.cycle_end}
+                    <input style={inputStyle} type="date" value={pep.cycle_end}
                       onChange={e => { const c=[...peptides]; c[i].cycle_end=e.target.value; setPeptides(c) }} />
                   </div>
                 </div>
                 <button onClick={() => setPeptides(peptides.filter((_: any, pi: number) => pi !== i))}
-                  style={{ marginTop: '10px', background: 'var(--red-dim)', color: 'var(--red)', border: '1px solid var(--red)', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer', fontSize: '13px' }}>
+                  style={{ marginTop: '10px', background: '#fee2e2', color: '#dc2626', border: '1px solid #fecaca', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer', fontSize: '13px', fontWeight: 500 }}>
                   Eliminar
                 </button>
               </div>
             ))}
-            <button onClick={addPeptide} className="btn-primary" style={{ fontSize: '13px' }}>
+            <button onClick={addPeptide} style={{ background: 'transparent', border: '1px dashed #cbd5e1', color: '#2563eb', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '13px', fontWeight: 600, width: '100%', marginTop: '4px' }}>
               + Agregar Péptido
             </button>
           </div>
@@ -371,52 +381,52 @@ export default function EditConsultationForm({
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '6px' }}>
                 {LAB_STUDIES.map(study => (
                   <button key={study.name} onClick={() => addLabStudy(study)}
-                    style={{ padding: '6px 14px', borderRadius: '20px', border: '1px solid var(--border)', background: 'var(--bg-elevated)', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '12px', transition: 'all 0.15s' }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor='var(--cyan)'; e.currentTarget.style.color='var(--cyan)' }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.color='var(--text-secondary)' }}
+                    style={{ padding: '6px 14px', borderRadius: '20px', border: '1px solid #cbd5e1', background: '#f8fafc', color: '#475569', cursor: 'pointer', fontSize: '12px', fontWeight: 500, transition: 'all 0.15s' }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor='#2563eb'; e.currentTarget.style.color='#2563eb' }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569' }}
                   >+ {study.name}</button>
                 ))}
               </div>
             </div>
 
             {labs.length === 0 && (
-              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '16px' }}>
+              <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '16px' }}>
                 No hay laboratorios registrados. Agrega un estudio arriba o un parámetro personalizado abajo.
               </p>
             )}
 
             {labs.length > 0 && (
               <div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 0.8fr 0.8fr 0.8fr auto', gap: '8px', padding: '8px 12px', fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 0.8fr 0.8fr 0.8fr auto', gap: '8px', padding: '8px 12px', fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                   <span>PARÁMETRO</span><span>VALOR</span><span>UNIDAD</span><span>REF MIN</span><span>REF MAX</span><span></span>
                 </div>
                 {labs.map((lab: any, i: number) => (
                   <div key={i} style={{
                     display: 'grid', gridTemplateColumns: '1.5fr 1fr 0.8fr 0.8fr 0.8fr auto',
                     gap: '8px', marginBottom: '8px', alignItems: 'center',
-                    background: lab.isNew ? 'rgba(0,200,255,0.03)' : 'transparent',
+                    background: lab.isNew ? '#f0f9ff' : 'transparent',
                     borderRadius: '6px', padding: lab.isNew ? '4px' : '0',
-                    border: lab.isNew ? '1px solid rgba(0,200,255,0.2)' : 'none',
+                    border: lab.isNew ? '1px solid #bae6fd' : 'none',
                   }}>
-                    <input className="input-dark" value={lab.param} placeholder="Parámetro" style={{ fontSize: '13px' }}
+                    <input style={{ ...inputStyle, fontSize: '13px' }} value={lab.param} placeholder="Parámetro"
                       onChange={e => { const c=[...labs]; c[i].param=e.target.value; setLabs(c) }} />
-                    <input className="input-dark" type="number" value={lab.value} placeholder="Valor" style={{ fontSize: '13px' }}
+                    <input style={{ ...inputStyle, fontSize: '13px' }} type="number" value={lab.value} placeholder="Valor"
                       onChange={e => { const c=[...labs]; c[i].value=e.target.value; setLabs(c) }} />
-                    <input className="input-dark" value={lab.unit} placeholder="mg/dL" style={{ fontSize: '13px' }}
+                    <input style={{ ...inputStyle, fontSize: '13px' }} value={lab.unit} placeholder="mg/dL"
                       onChange={e => { const c=[...labs]; c[i].unit=e.target.value; setLabs(c) }} />
-                    <input className="input-dark" type="number" value={lab.ref_min} placeholder="Min" style={{ fontSize: '13px' }}
+                    <input style={{ ...inputStyle, fontSize: '13px' }} type="number" value={lab.ref_min} placeholder="Min"
                       onChange={e => { const c=[...labs]; c[i].ref_min=e.target.value; setLabs(c) }} />
-                    <input className="input-dark" type="number" value={lab.ref_max} placeholder="Max" style={{ fontSize: '13px' }}
+                    <input style={{ ...inputStyle, fontSize: '13px' }} type="number" value={lab.ref_max} placeholder="Max"
                       onChange={e => { const c=[...labs]; c[i].ref_max=e.target.value; setLabs(c) }} />
                     <button onClick={() => setLabs(labs.filter((_: any, li: number) => li !== i))}
-                      style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px' }}>×</button>
+                      style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '18px' }}>×</button>
                   </div>
                 ))}
               </div>
             )}
 
             <button onClick={() => setLabs([...labs, { id: null, param: '', value: '', unit: '', ref_min: '', ref_max: '', isNew: true }])}
-              className="btn-ghost" style={{ fontSize: '13px', marginTop: '8px' }}>
+              style={{ background: 'transparent', border: '1px dashed #cbd5e1', color: '#2563eb', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontSize: '13px', fontWeight: 600, width: '100%', marginTop: '12px' }}>
               + Agregar parámetro personalizado
             </button>
           </div>
@@ -426,10 +436,13 @@ export default function EditConsultationForm({
         {activeSection === 'notes' && (
           <div>
             <STitle icon="📝" title="Notas del Especialista" />
-            <textarea className="input-dark" rows={8} value={notes}
+            <textarea 
+              style={{ ...inputStyle, resize: 'vertical', lineHeight: '1.6', height: '160px' }} 
+              rows={8} 
+              value={notes}
               onChange={e => setNotes(e.target.value)}
-              style={{ resize: 'vertical', lineHeight: '1.6' }}
-              placeholder="Observaciones, ajustes de tratamiento, seguimiento..." />
+              placeholder="Observaciones, ajustes de tratamiento, seguimiento..." 
+            />
           </div>
         )}
       </div>
@@ -437,18 +450,30 @@ export default function EditConsultationForm({
   )
 }
 
-const ls: React.CSSProperties = { fontSize: '12px', color: 'var(--text-secondary)', display: 'block', marginBottom: '6px', fontWeight: 500 }
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '10px 12px',
+  background: '#ffffff',
+  border: '1px solid #cbd5e1',
+  borderRadius: '8px',
+  color: '#0f172a',
+  outline: 'none',
+  fontSize: '14px',
+  boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+}
+
+const ls: React.CSSProperties = { fontSize: '12px', color: '#475569', display: 'block', marginBottom: '6px', fontWeight: 600 }
 const grid: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }
 
 function STitle({ icon, title }: { icon: string; title: string }) {
-  return <h3 style={{ fontFamily: 'DM Sans', fontSize: '15px', fontWeight: 700, margin: '0 0 14px', display: 'flex', alignItems: 'center', gap: '8px' }}>{icon} {title}</h3>
+  return <h3 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '15px', fontWeight: 700, margin: '0 0 14px', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '8px' }}>{icon} {title}</h3>
 }
 
 function FF({ label, placeholder, value, onChange }: { label: string; placeholder: string; value: string; onChange: (v: string) => void }) {
   return (
     <div>
       <label style={ls}>{label}</label>
-      <input className="input-dark" type="number" step="0.1" placeholder={placeholder} value={value} onChange={e => onChange(e.target.value)} />
+      <input style={inputStyle} type="number" step="0.1" placeholder={placeholder} value={value} onChange={e => onChange(e.target.value)} />
     </div>
   )
 }

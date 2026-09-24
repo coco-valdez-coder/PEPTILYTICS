@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Peptivita Meter',
-  description: 'Seguimiento clínico y optimización mediante péptidos',
+  title: 'PeptiLytics',
+  description: 'Plataforma de seguimiento clínico y optimización',
 }
 
 export default function RootLayout({

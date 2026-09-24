@@ -26,7 +26,6 @@ export default function ModeratorPanel({
       const { data, error } = await supabase
         .from('patients')
         .select('*')
-        // Se elimina el eq('is_active', true) temporalmente por si los inserts manuales lo omitieron
         .order('full_name', { ascending: true })
       
       if (error) console.error('🚨 Error cargando pacientes:', error)
@@ -66,7 +65,7 @@ export default function ModeratorPanel({
   }
 
   const navItems = [
-    { id: 'search',      icon: '🔍', label: 'Pacientes' },
+    { id: 'search',     icon: '🔍', label: 'Pacientes' },
     { id: 'new-patient', icon: '➕', label: 'Nuevo Paciente' },
   ]
 
@@ -76,18 +75,18 @@ export default function ModeratorPanel({
   ]
 
   return (
-    <div style={{ display: 'flex', height: '100vh', background: 'var(--bg-deep)' }}>
+    <div style={{ display: 'flex', height: '100vh', background: '#f8fafc', color: '#1e293b' }}>
       {/* Sidebar */}
       <aside style={{
         width: '240px', minWidth: '240px',
-        background: 'var(--bg-surface)',
-        borderRight: '1px solid var(--border)',
+        background: '#ffffff',
+        borderRight: '1px solid #e2e8f0',
         display: 'flex', flexDirection: 'column',
         padding: '24px 16px',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
           <span style={{ fontSize: '22px' }}>🧬</span>
-          <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '16px' }}>Peptivita</span>
+          <span style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 700, fontSize: '16px', color: '#0f172a' }}>PeptiLytics</span>
         </div>
 
         <nav style={{ flex: 1 }}>
@@ -97,8 +96,8 @@ export default function ModeratorPanel({
               style={{
                 width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
                 padding: '10px 12px', borderRadius: '8px', border: 'none', cursor: 'pointer',
-                background: view === item.id ? 'var(--cyan-dim)' : 'transparent',
-                color: view === item.id ? 'var(--cyan)' : 'var(--text-secondary)',
+                background: view === item.id ? '#eff6ff' : 'transparent',
+                color: view === item.id ? '#2563eb' : '#64748b',
                 fontSize: '14px', fontWeight: view === item.id ? 600 : 400,
                 marginBottom: '4px', textAlign: 'left', transition: 'all 0.15s',
               }}
@@ -108,18 +107,25 @@ export default function ModeratorPanel({
           ))}
         </nav>
 
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
-          <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px' }}>
+        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
+          <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '8px', fontWeight: 500 }}>
             {moderator?.full_name || 'Moderador'}
           </div>
-          <button onClick={onLogout} className="btn-ghost" style={{ width: '100%', padding: '8px', fontSize: '13px' }}>
+          <button 
+            onClick={onLogout} 
+            style={{ 
+              width: '100%', padding: '8px', fontSize: '13px', 
+              background: 'transparent', border: '1px solid #cbd5e1', 
+              borderRadius: '6px', color: '#475569', cursor: 'pointer', fontWeight: 500 
+            }}
+          >
             Cerrar sesión
           </button>
         </div>
       </aside>
 
       {/* Main */}
-      <main style={{ flex: 1, overflow: 'auto', padding: '32px' }}>
+      <main style={{ flex: 1, overflow: 'auto', padding: '32px', background: '#f8fafc' }}>
 
         {/* NUEVO PACIENTE */}
         {view === 'new-patient' && (
@@ -133,10 +139,10 @@ export default function ModeratorPanel({
         {view === 'search' && (
           <div>
             <div style={{ marginBottom: '24px' }}>
-              <h1 style={{ fontFamily: 'DM Sans', fontSize: '24px', fontWeight: 700, margin: '0 0 4px' }}>
+              <h1 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '24px', fontWeight: 700, margin: '0 0 4px', color: '#0f172a' }}>
                 Pacientes
               </h1>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', margin: 0 }}>
+              <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
                 {allPatients.length} pacientes registrados
               </p>
             </div>
@@ -144,8 +150,11 @@ export default function ModeratorPanel({
             <div style={{ position: 'relative', marginBottom: '24px', maxWidth: '480px' }}>
               <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '16px', pointerEvents: 'none' }}>🔍</span>
               <input
-                className="input-dark"
-                style={{ paddingLeft: '38px', fontSize: '15px' }}
+                style={{
+                  width: '100%', padding: '10px 12px 10px 38px', fontSize: '15px',
+                  background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px',
+                  color: '#0f172a', outline: 'none', boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                }}
                 placeholder="Buscar por nombre o cédula..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
@@ -153,32 +162,39 @@ export default function ModeratorPanel({
               />
               {searchQuery && (
                 <button onClick={() => setSearchQuery('')}
-                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px' }}>
+                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '18px' }}>
                   ×
                 </button>
               )}
             </div>
 
             {loadingPatients ? (
-              <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Cargando pacientes...</div>
+              <div style={{ color: '#64748b', fontSize: '14px' }}>Cargando pacientes...</div>
             ) : filteredPatients.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--text-secondary)' }}>
+              <div style={{ textAlign: 'center', padding: '48px 24px', color: '#64748b' }}>
                 <div style={{ fontSize: '40px', marginBottom: '12px' }}>🔍</div>
-                <div style={{ fontWeight: 600, marginBottom: '8px' }}>No se encontró "{searchQuery}"</div>
-                <button className="btn-primary" onClick={() => setView('new-patient')} style={{ marginTop: '8px', fontSize: '13px' }}>
+                <div style={{ fontWeight: 600, marginBottom: '8px', color: '#334155' }}>No se encontró "{searchQuery}"</div>
+                <button 
+                  onClick={() => setView('new-patient')} 
+                  style={{ 
+                    marginTop: '8px', fontSize: '13px', padding: '10px 16px', 
+                    background: '#2563eb', color: '#ffffff', border: 'none', 
+                    borderRadius: '8px', cursor: 'pointer', fontWeight: 600, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
+                  }}
+                >
                   + Registrar nuevo paciente
                 </button>
               </div>
             ) : (
               <div>
                 {searchQuery && (
-                  <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px' }}>
+                  <div style={{ fontSize: '13px', color: '#64748b', marginBottom: '16px' }}>
                     {filteredPatients.length} resultado{filteredPatients.length !== 1 ? 's' : ''} para "{searchQuery}"
                   </div>
                 )}
                 {alphabet.map(letter => (
                   <div key={letter} style={{ marginBottom: '20px' }}>
-                    <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--cyan)', letterSpacing: '1px', marginBottom: '8px', paddingBottom: '6px', borderBottom: '1px solid var(--border)' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#2563eb', letterSpacing: '1px', marginBottom: '8px', paddingBottom: '6px', borderBottom: '1px solid #e2e8f0' }}>
                       {letter}
                     </div>
                     <div style={{ display: 'grid', gap: '6px' }}>
@@ -199,13 +215,13 @@ export default function ModeratorPanel({
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <div>
                 <button onClick={() => { setFoundPatient(null); setView('search') }}
-                  style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '13px', marginBottom: '6px', padding: 0, display: 'block' }}>
+                  style={{ background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '13px', marginBottom: '6px', padding: 0, display: 'block', fontWeight: 500 }}>
                   ← Volver a Pacientes
                 </button>
-                <h1 style={{ fontFamily: 'DM Sans', fontSize: '22px', fontWeight: 700, margin: '0 0 2px' }}>
+                <h1 style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '22px', fontWeight: 700, margin: '0 0 2px', color: '#0f172a' }}>
                   {foundPatient.full_name || 'Paciente sin nombre'}
                 </h1>
-                <p style={{ color: 'var(--text-muted)', fontSize: '13px', margin: 0 }}>CI: {foundPatient.cedula || 'N/A'}</p>
+                <p style={{ color: '#64748b', fontSize: '13px', margin: 0 }}>CI: {foundPatient.cedula || 'N/A'}</p>
               </div>
             </div>
 
@@ -216,8 +232,10 @@ export default function ModeratorPanel({
                   style={{
                     padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer',
                     fontSize: '14px', fontWeight: 600,
-                    background: view === t.id ? 'var(--cyan-dim)' : 'var(--bg-card)',
-                    color: view === t.id ? 'var(--cyan)' : 'var(--text-secondary)',
+                    background: view === t.id ? '#eff6ff' : '#ffffff',
+                    color: view === t.id ? '#2563eb' : '#64748b',
+                    boxShadow: view === t.id ? '0 1px 2px rgba(37,99,235,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
+                    border: view === t.id ? '1px solid #bfdbfe' : '1px solid #e2e8f0',
                     transition: 'all 0.15s',
                   }}
                 >{t.icon} {t.label}</button>
@@ -248,7 +266,7 @@ function PatientRow({ patient, searchQuery, onClick }: {
     return (
       <span>
         {text.slice(0, idx)}
-        <mark style={{ background: 'var(--cyan-dim)', color: 'var(--cyan)', borderRadius: '2px', padding: '0 1px' }}>
+        <mark style={{ background: '#dbeafe', color: '#1d4ed8', borderRadius: '2px', padding: '0 1px' }}>
           {text.slice(idx, idx + query.length)}
         </mark>
         {text.slice(idx + query.length)}
@@ -265,33 +283,34 @@ function PatientRow({ patient, searchQuery, onClick }: {
       style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '14px 16px', borderRadius: '10px', width: '100%', textAlign: 'left',
-        border: `1px solid ${hovered ? 'var(--cyan)' : 'var(--border)'}`,
-        background: hovered ? 'var(--cyan-dim)' : 'var(--bg-card)',
+        border: `1px solid ${hovered ? '#93c5fd' : '#e2e8f0'}`,
+        background: hovered ? '#f0fdf4' : '#ffffff',
         cursor: 'pointer', transition: 'all 0.15s',
+        boxShadow: hovered ? '0 4px 6px -1px rgba(0,0,0,0.05)' : '0 1px 2px rgba(0,0,0,0.02)'
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <div style={{
           width: '36px', height: '36px', borderRadius: '50%',
-          background: hovered ? 'var(--cyan)' : 'var(--bg-elevated)',
+          background: hovered ? '#2563eb' : '#f1f5f9',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '15px', fontWeight: 700,
-          color: hovered ? 'var(--bg-deep)' : 'var(--text-secondary)',
+          color: hovered ? '#ffffff' : '#475569',
           transition: 'all 0.15s', flexShrink: 0,
         }}>
           {initial}
         </div>
         <div>
-          <div style={{ fontWeight: 600, fontSize: '14px', marginBottom: '2px' }}>
+          <div style={{ fontWeight: 600, fontSize: '14px', marginBottom: '2px', color: '#0f172a' }}>
             {highlight(patient.full_name || 'Paciente Sin Nombre', searchQuery)}
           </div>
-          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '12px', color: '#64748b' }}>
             CI: {highlight(patient.cedula || 'N/A', searchQuery)}
             {patient.gender && <span style={{ marginLeft: '8px' }}>{patient.gender === 'M' ? '♂' : patient.gender === 'F' ? '♀' : '⚧'}</span>}
           </div>
         </div>
       </div>
-      <span style={{ color: 'var(--cyan)', fontSize: '16px', opacity: hovered ? 1 : 0, transition: 'opacity 0.15s' }}>→</span>
+      <span style={{ color: '#2563eb', fontSize: '16px', opacity: hovered ? 1 : 0, transition: 'opacity 0.15s' }}>→</span>
     </button>
   )
 }
